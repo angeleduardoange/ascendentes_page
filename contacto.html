@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANALES DE VIGILANCIA - ASCENDENTES</title>
+    <style>
+        /* Animación de entrada de datos */
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: 0%; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        body { 
+            background: #050505; 
+            color: #1aff1a; 
+            font-family: 'Courier New', monospace; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto; /* Permitir scroll en móviles */
+        }
+
+        /* Línea de escaneo moviéndose */
+        body::after {
+            content: "";
+            position: fixed; /* Fixed para que siga al hacer scroll */
+            top: 0; left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(26, 255, 26, 0.15);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid #1aff1a;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 40px rgba(26, 255, 26, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-sizing: border-box;
+            margin: 20px 0;
+        }
+
+        h1 { font-size: 1.6em; text-shadow: 0 0 15px #1aff1a; border-bottom: 2px solid #1aff1a; padding-bottom: 10px; }
+        
+        /* Grid de Redes Sociales */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Móvil primero */
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 2.2em; }
+            .social-grid { grid-template-columns: repeat(3, 1fr); }
+            .container { padding: 40px; }
+        }
+
+        .social-card {
+            border: 1px solid #333;
+            padding: 20px 10px;
+            text-decoration: none;
+            color: #1aff1a;
+            transition: all 0.3s ease;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        /* Efecto de carga en Hover */
+        .social-card::before {
+            content: "DECRYPTING...";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1aff1a;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8em;
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .social-card:hover::before { transform: translateY(0); }
+
+        .social-card:hover {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(26, 255, 26, 0.4);
+        }
+
+        .social-card i { font-size: 0.7em; display: block; margin-bottom: 5px; color: #666; }
+        .social-card b { font-size: 1.1em; letter-spacing: 2px; }
+
+        /* Correo Estilizado */
+        .mail-section {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px dashed #333;
+            background: rgba(26, 255, 26, 0.02);
+        }
+
+        .email-address {
+            font-size: 1em;
+            color: #fff;
+            background: #111;
+            padding: 15px;
+            display: block;
+            margin-top: 15px;
+            border: 1px solid #1aff1a;
+            cursor: pointer;
+            word-break: break-all; /* Evita que el correo se salga en pantallas pequeñas */
+            transition: 0.3s;
+        }
+
+        @media (min-width: 400px) {
+            .email-address { font-size: 1.2em; display: inline-block; }
+        }
+
+        .email-address:hover {
+            background: #1aff1a;
+            color: #000;
+            box-shadow: 0 0 20px #1aff1a;
+        }
+
+        /* Botón de Pánico */
+        .panic-button {
+            background: #a00;
+            color: white;
+            border: none;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin-top: 40px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+            transition: 0.3s;
+        }
+
+        .panic-button:active {
+            transform: scale(0.95);
+            background: #f00;
+        }
+
+        .back-link { 
+            margin: 40px 0; 
+            color: #666; 
+            text-decoration: none; 
+            font-size: 0.9em; 
+            display: inline-block;
+            transition: 0.3s;
+            border: 1px solid transparent;
+            padding: 5px 10px;
+        }
+        .back-link:hover { color: yellow; border: 1px solid yellow; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CANALES DE VIGILANCIA</h1>
+        <p style="color: #888; font-size: 0.8em;">[ ESTADO: ENLACES ENCRIPTADOS ]</p>
+
+        <div class="social-grid">
+            <a href="https://instagram.com/ascendentesband" class="social-card" target="_blank">
+                <i>[ RED_EXTERNA_01 ]</i>
+                <b>INSTAGRAM</b>
+            </a>
+            <a href="https://tiktok.com/@ascendentesband" class="social-card" target="_blank">
+                <i>[ RED_EXTERNA_02 ]</i>
+                <b>TIKTOK</b>
+            </a>
+            <a href="https://youtube.com/@ascendentesband" class="social-card" target="_blank">
+                <i>[ RED_EXTERNA_03 ]</i>
+                <b>YOUTUBE</b>
+            </a>
+        </div>
+
+        <div class="mail-section">
+            <p style="font-size: 0.9em;">> CONTACTO DE OPERACIONES:</p>
+            <div class="email-address" onclick="copyEmail()">Ascendentesband@gmail.com</div>
+            <p id="copy-msg" style="font-size: 0.7em; color: yellow; margin-top: 10px; display: none;">✓ COPIADO AL PORTAPAPELES</p>
+        </div>
+
+        <button class="panic-button" onclick="triggerPanic()">
+            EMITIR ALERTA DE AVISTAMIENTO
+        </button>
+
+        <br>
+        <a href="index.html" class="back-link">> REGRESAR AL TERMINAL</a>
+    </div>
+
+    <script>
+        function copyEmail() {
+            navigator.clipboard.writeText("Ascendentesband@gmail.com");
+            const msg = document.getElementById('copy-msg');
+            msg.style.display = "block";
+            setTimeout(() => msg.style.display = "none", 2000);
+        }
+
+        function triggerPanic() {
+            alert("ALERTA ENVIADA.\n\nEscuadrón de contención en camino.\nNo intente oler el área.");
+        }
+    </script>
+
+</body>
+</html>

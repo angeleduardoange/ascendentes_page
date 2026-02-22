@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTENIDO PROHIBIDO - ACCESO RESTRINGIDO</title>
+    <style>
+        body { 
+            background-color: #050505; color: #1aff1a; font-family: 'Courier New', monospace; 
+            margin: 0; padding: 15px; display: flex; flex-direction: column; 
+            align-items: center; min-height: 100vh; justify-content: center;
+            box-sizing: border-box;
+        }
+        #terminal { 
+            width: 100%; max-width: 900px; background: rgba(0,0,0,0.9); 
+            padding: 20px; border: 1px solid #1aff1a; 
+            box-shadow: 0 0 20px rgba(26,255,26,0.3);
+            box-sizing: border-box;
+        }
+        .header-gov { 
+            color: red; text-align: center; font-weight: bold; font-size: 1.2em; 
+            margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px solid red; padding-bottom: 10px; 
+        }
+        .menu-container { text-align: center; margin-top: 30px; display: none; }
+        
+        /* Ajuste de botones para móvil */
+        .menu-item { 
+            display: block; /* Uno debajo de otro */
+            margin: 10px 0; padding: 15px; 
+            border: 1px solid #1aff1a; color: #1aff1a; 
+            text-decoration: none; transition: 0.3s; 
+            font-size: 1.1em;
+        }
+
+        /* En pantallas grandes, vuelven a estar uno al lado del otro */
+        @media (min-width: 600px) {
+            .menu-item { display: inline-block; margin: 10px; width: auto; }
+            .header-gov { font-size: 1.5em; }
+        }
+
+        .blink { animation: blinker 1s linear infinite; color: red; }
+        @keyframes blinker { 50% { opacity: 0; } }
+        #typing { font-size: 0.9em; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<div id="terminal">
+    <div class="header-gov">CONTENIDO PROHIBIDO - GOBIERNO DE VENEZUELA</div>
+    <p id="typing"></p>
+    
+    <div id="menu" class="menu-container">
+        <p style="font-size: 0.8em; color: #555;">--- ACCESO AUTORIZADO ---</p>
+        <a href="antecedentes.html" class="menu-item">Antecedentes Penales</a>
+        <a href="integrantes.html" class="menu-item">Integrantes</a>
+        <a href="descripcion.html" class="menu-item">Descripción General</a>
+        <a href="contacto.html" class="menu-item">Contactos Públicos</a>
+        <a href="demandas.html" class="menu-item">Demandas Activas</a>
+    </div>
+</div>
+
+<script>
+    const text = "> Conectando con CICPC...\n> Descargando expedientes.....\n> ¡ADVERTENCIA: CONTENIDO SENSIBLE!";
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            let char = text.charAt(i);
+            document.getElementById("typing").innerHTML += char === "\n" ? "<br>" : char;
+            i++;
+            setTimeout(type, 35);
+        } else {
+            document.getElementById("menu").style.display = "block";
+        }
+    }
+    type();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA DE DENUNCIAS - ASCENDENTES</title>
+    <style>
+        /* Animación de parpadeo global */
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.9; }
+            15% { opacity: 0.98; }
+            20% { opacity: 0.92; }
+            100% { opacity: 1; }
+        }
+
+        /* Animación de Glitch para el Error 404 */
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: -2px 0 red, 2px 0 blue; }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        body { 
+            background: #050505; 
+            color: #1aff1a; 
+            font-family: 'Courier New', monospace; 
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: flicker 0.1s infinite;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid #1aff1a;
+            padding: 20px;
+            background: rgba(0, 15, 0, 0.95);
+            box-shadow: 0 0 20px rgba(26, 255, 26, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 1.2em; border-bottom: 2px solid #1aff1a; padding-bottom: 10px; text-align: center; }
+
+        /* Status line adaptado para no romper el layout */
+        .status-line { 
+            overflow: hidden; 
+            white-space: normal; /* Cambiado para móvil */
+            border-right: .15em solid orange;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 0.9em;
+        }
+
+        @keyframes typing { from { max-height: 0 } to { max-height: 100px } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: orange; } }
+
+        .error-msg { 
+            color: #ff0000; 
+            font-size: 1.1em; 
+            text-align: center; 
+            border: 2px solid red; 
+            padding: 15px; 
+            margin: 25px 0; 
+            font-weight: bold;
+            animation: glitch 0.3s infinite;
+        }
+
+        .form-denuncia {
+            border-top: 1px dashed #1aff1a;
+            padding-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 3s;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        input, textarea {
+            width: 100%;
+            background: #000;
+            border: 1px solid #1aff1a;
+            color: #1aff1a;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            box-sizing: border-box;
+            font-size: 16px; /* Evita zoom automático en iOS */
+        }
+
+        button {
+            background: #600;
+            color: white;
+            border: 1px solid red;
+            padding: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: 0.2s;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        button:hover { background: red; box-shadow: 0 0 20px red; color: black; }
+
+        #loading-bar {
+            display: none;
+            width: 100%;
+            background: #222;
+            height: 25px;
+            margin-top: 15px;
+            border: 1px solid #1aff1a;
+        }
+
+        #progress {
+            width: 0%;
+            height: 100%;
+            background: #1aff1a;
+            transition: width 0.3s;
+        }
+
+        .back { 
+            color: #666; 
+            text-decoration: none; 
+            margin: 30px 0; 
+            font-size: 0.9em; 
+            text-align: center;
+            border: 1px solid transparent;
+            padding: 5px;
+        }
+        .back:hover { color: yellow; border-color: yellow; }
+
+        /* Media Queries para Escritorio */
+        @media (min-width: 768px) {
+            body { padding: 40px; }
+            .container { padding: 30px; }
+            h1 { font-size: 1.5em; }
+            .status-line { font-size: 1em; white-space: nowrap; }
+            .error-msg { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>REGISTRO DE AGRESIONES RÍTMICAS</h1>
+        
+        <div class="status-line">> PROCESANDO DENUNCIAS CONTRA ABRAHAM S...</div>
+        
+        <p style="font-size: 0.9em; text-align: center;">El sistema de justicia ha colapsado bajo el peso de la "Esencia" de los Ascendentes.</p>
+        
+        <div class="error-msg">
+            [ ERROR 404: JUSTICIA NOT FOUND ]
+        </div>
+
+        <div class="form-denuncia">
+            <h3 style="font-size: 1em;">NUEVO REPORTE DE TRAUMA</h3>
+            <input type="text" id="nombre" placeholder="Nombre de la víctima...">
+            <textarea id="relato" rows="4" placeholder="Describe el incidente (lácteos, aceite, miradas extrañas...)"></textarea>
+            
+            <button onclick="enviarFake()">ENVIAR A LA INTERPOL</button>
+            
+            <div id="loading-bar"><div id="progress"></div></div>
+            <p id="status-text" style="display:none; text-align: center; font-size: 0.75em; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <a href="index.html" class="back">< VOLVER AL SISTEMA CENTRAL</a>
+
+    <script>
+        function enviarFake() {
+            const bar = document.getElementById('loading-bar');
+            const prog = document.getElementById('progress');
+            const status = document.getElementById('status-text');
+            const nombre = document.getElementById('nombre').value;
+
+            if(!nombre) {
+                alert("ERROR: Identidad de víctima requerida.");
+                return;
+            }
+
+            bar.style.display = "block";
+            status.style.display = "block";
+            let width = 0;
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    status.innerText = "ERROR: ARCHIVO BLOQUEADO POR EL SUJETO 'ABRAHAM S.'";
+                    status.style.color = "red";
+                    setTimeout(() => {
+                        alert("AVISO LEGAL:\nTu denuncia ha sido convertida en un poema por Abraham.\n\nEstatus: RIDICULIZADO.");
+                        location.reload();
+                    }, 1500);
+                } else {
+                    width += 5;
+                    prog.style.width = width + '%';
+                    status.innerText = `RENAUDANDO PROTOCOLO... ${width}%`;
+                }
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>
